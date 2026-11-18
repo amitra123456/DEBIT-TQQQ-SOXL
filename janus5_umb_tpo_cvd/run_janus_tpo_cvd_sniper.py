@@ -1,14 +1,19 @@
 """
-Unified Production 2-Layer Sniper Engine:
+Unified Production 2-Layer Sniper Engine (v2 — Post-Audit Hardened Configuration):
   Layer 1: JANUS-5 / UMB Macro Regime + 5d Exhaustion Volume & Flush/Trough FR-VWAP Filter
   Layer 2: Reduced 2-Factor Intraday Execution & Overnight Timing (15:50 TPO Profile + 1m Delta Flow CVD)
 =========================================================================================================
-1. Validates the Combined 2-Layer Engine across 2020-2026 (including the 2022 Bear Market)
-   with real TQQQ/SQQQ and SOXL/SOXS fills and 1x/2x/3x transaction costs.
-2. Computes live intraday & 15:50 EOD signals, TPO POC/VAH/VAL, 1m/5m/30m Opening Ranges,
-   1m Delta Flow (CVD), and 5d Flush/Trough FR-VWAP levels for today's trading session.
+Implements the 3 Post-Audit Production Upgrades:
+  1. Stricter Layer-2 Conviction Thresholds: PROB_LONG = 0.57, PROB_SHORT = 0.43 (cuts boundary churn).
+  2. Turnover-Reduced Multi-Day Swing Continuity + Marketable Limit Order Windows (15:50-15:55 & 09:32-09:35):
+     - In Multi-Day Swing Hold mode, holds existing Long/Short while Layer 1 remains valid and Layer 2 stays
+       aligned (prob >= 0.50 for held Long, prob <= 0.50 for held Short), charging transaction costs ONLY
+       when position changes (actual turnover), preventing daily round-trip spread drag.
+  3. Half-Sized SOXL/SOXS Allocation Relative to TQQQ/SQQQ (1.0x TQQQ/SQQQ : 0.5x SOXL/SOXS = 66.7% / 33.3%)
+     to equalize realized volatility and cut portfolio tail drawdown.
 """
 
+import sys
 from pathlib import Path
 import warnings
 import numpy as np
@@ -19,7 +24,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 
-import sys
 ROOT = Path("c:/Users/amitr/OneDrive/Documents/ANT_SOX")
 sys.path.insert(0, str(ROOT / "research" / "macro_5pct_engine"))
 
@@ -33,6 +37,14 @@ from test_2020_2023_untouched_tpo_cvd_sqqq_soxs import (
 
 warnings.filterwarnings("ignore")
 
+# Production Hyperparameters (Locked Post-Audit)
+PROB_LONG_ENTRY = 0.57
+PROB_SHORT_ENTRY = 0.43
+PROB_LONG_HOLD = 0.50
+PROB_SHORT_HOLD = 0.50
+WEIGHT_TQQQ = 2.0 / 3.0  # 1.0x base unit (66.7% of risk budget)
+WEIGHT_SOXL = 1.0 / 3.0  # 0.5x half-size unit (33.3% of risk budget)
+
 
 def add_layer1_macro_frvwap_features(df_bull: pd.DataFrame, df_und: pd.DataFrame) -> pd.DataFrame:
     """
@@ -41,16 +53,11 @@ def add_layer1_macro_frvwap_features(df_bull: pd.DataFrame, df_und: pd.DataFrame
     """
     df = df_bull.copy()
     u_c = df_und["px_1550"].reindex(df.index)
-    u_o = df_und["open"].reindex(df.index)
 
-    # Underlying moving averages & slope (known at 15:50 on day t)
     sma50 = u_c.rolling(50, min_periods=20).mean()
     sma200 = u_c.rolling(200, min_periods=50).mean()
     sma200_slope21 = sma200.pct_change(21).fillna(0.0) * 100.0
-    ema10 = u_c.ewm(span=10, adjust=False).mean()
-    ema20 = u_c.ewm(span=20, adjust=False).mean()
 
-    # 5-day Flush Fixed-Range Price & Trough Reclaim
     low5 = u_c.rolling(5, min_periods=1).min()
     high20 = u_c.rolling(20, min_periods=5).max()
     low20 = u_c.rolling(20, min_periods=5).min()
@@ -58,18 +65,10 @@ def add_layer1_macro_frvwap_features(df_bull: pd.DataFrame, df_und: pd.DataFrame
     flush_vwap5 = u_c.rolling(5, min_periods=1).mean()
     trough_reclaim = (u_c >= low5 * 1.01) & (df["clv_1550"] >= 0.50)
 
-    # Layer 1 Bull Regime Permission:
-    # Allowed to take Longs (TQQQ/SOXL) when:
-    #   (a) Structural Bull Trend (Underlying > SMA200 or SMA200 rising and Underlying > SMA50), OR
-    #   (b) Verified Real Bounce off Washout (Underlying >= 5d Flush VWAP * 0.995 or Trough Reclaim with Positive PM CVD)
     bull_trend_ok = (u_c >= sma200 * 0.985) | ((sma200_slope21 > 0.0) & (u_c >= sma50))
     real_bounce_ok = ((u_c >= flush_vwap5 * 0.995) | trough_reclaim) & (df_und["cvd_pm_1550"].reindex(df.index) > 0.0)
     df["layer1_allow_long"] = (bull_trend_ok | real_bounce_ok).astype(bool)
 
-    # Layer 1 Bear Regime Permission:
-    # Allowed to take Shorts (SQQQ/SOXS) when:
-    #   (a) Structural Downtrend / Bear Regime (Underlying < SMA50 or < SMA200 or pos20 < 0.55), OR
-    #   (b) Severe Intraday Overextension (poc_dist_1550 > +1.5% with negative full-day CVD)
     bear_regime_ok = (u_c < sma50) | (u_c < sma200) | (pos20 < 0.55)
     overext_top_ok = (df["poc_dist_1550"] > 1.5) & (df["cvd_day_1550"] < 0.0)
     df["layer1_allow_short"] = (bear_regime_ok | overext_top_ok).astype(bool)
@@ -77,9 +76,9 @@ def add_layer1_macro_frvwap_features(df_bull: pd.DataFrame, df_und: pd.DataFrame
 
 
 def run_2layer_backtest():
-    print("=" * 125)
-    print("2-LAYER HIERARCHY BACKTEST (2020-2026): LAYER 1 (MACRO/FR-VWAP) + LAYER 2 (15:50 TPO + 1m CVD)")
-    print("=" * 125)
+    print("=" * 130)
+    print("PRODUCTION 2-LAYER SNIPER ENGINE (0.57/0.43 THRESHOLD + TURNOVER-REDUCED SWING HOLD + 2:1 TQQQ:SOXL SIZING)")
+    print("=" * 130)
 
     syms = ["QQQ", "TQQQ", "SQQQ", "SOXX", "SOXL", "SOXS"]
     bars = {s: fetch_full_1m_2020_2026(s) for s in syms}
@@ -97,6 +96,9 @@ def run_2layer_backtest():
         "und_cvd_pm_1550",
     ]
 
+    results_by_pair = {}
+    live_models = {}
+
     for bull_etf, bear_etf, und_etf, cost_1x in [
         ("TQQQ", "SQQQ", "QQQ", 6.0),
         ("SOXL", "SOXS", "SOXX", 10.0),
@@ -108,23 +110,27 @@ def run_2layer_backtest():
         df["und_cvd_pm_1550"] = u_df["cvd_pm_1550"]
         df["inv_ret_24h_1550"] = inv_df["ret_24h_1550"]
         df["inv_ret_ovn_1550"] = inv_df["ret_ovn_1550"]
-        df = df.dropna(subset=feat_2factor + ["ret_24h_1550", "inv_ret_24h_1550", "ret_ovn_1550", "inv_ret_ovn_1550"]).copy()
+        df_valid = df.dropna(
+            subset=feat_2factor + ["ret_24h_1550", "inv_ret_24h_1550", "ret_ovn_1550", "inv_ret_ovn_1550"]
+        ).copy()
 
-        rf_s = get_historical_rf_daily(df.index)
-        X_all = df[feat_2factor].values
+        rf_s = get_historical_rf_daily(df_valid.index)
+        X_all = df_valid[feat_2factor].values
         min_train = 126
         refit_step = 21
 
-        def sim_hierarchy(ret_bull_col, ret_bear_col, cost_bps, use_layer1=True):
-            y_all = (df[ret_bull_col].values > 0.0).astype(int)
-            r_bull = df[ret_bull_col].values
-            r_bear = df[ret_bear_col].values
-            allow_l = df["layer1_allow_long"].values
-            allow_s = df["layer1_allow_short"].values
+        def sim_engine(ret_bull_col, ret_bear_col, cost_rt_bps, p_hi=PROB_LONG_ENTRY, p_lo=PROB_SHORT_ENTRY, multi_day_hold=False):
+            y_all = (df_valid[ret_bull_col].values > 0.0).astype(int)
+            r_bull = df_valid[ret_bull_col].values
+            r_bear = df_valid[ret_bear_col].values
+            allow_l = df_valid["layer1_allow_long"].values
+            allow_s = df_valid["layer1_allow_short"].values
             rf_v = rf_s.values
-            cost_dec = cost_bps / 10000.0
-            n = len(df)
+            half_turn_cost = (cost_rt_bps / 2.0) / 10000.0
+            rt_cost = cost_rt_bps / 10000.0
+            n = len(df_valid)
             pos = np.zeros(n)
+            probs = np.full(n, np.nan)
             clf = None
 
             for t in range(min_train, n):
@@ -132,53 +138,133 @@ def run_2layer_backtest():
                     clf = make_pipeline(StandardScaler(), LogisticRegression(C=0.20))
                     clf.fit(X_all[: t - 1], y_all[: t - 1])
                 p = clf.predict_proba(X_all[t : t + 1])[0, 1]
-                if p >= 0.55 and (not use_layer1 or allow_l[t]):
-                    pos[t] = 1.0
-                elif p <= 0.45 and (not use_layer1 or allow_s[t]):
-                    pos[t] = -1.0
+                probs[t] = p
 
-            net_ret = np.where(
-                pos == 1.0,
-                r_bull - cost_dec,
-                np.where(pos == -1.0, r_bear - cost_dec, rf_v),
+                if not multi_day_hold:
+                    if p >= p_hi and allow_l[t]:
+                        pos[t] = 1.0
+                    elif p <= p_lo and allow_s[t]:
+                        pos[t] = -1.0
+                else:
+                    prev_p = pos[t - 1]
+                    if prev_p == 1.0 and allow_l[t] and p >= PROB_LONG_HOLD:
+                        pos[t] = 1.0
+                    elif prev_p == -1.0 and allow_s[t] and p <= PROB_SHORT_HOLD:
+                        pos[t] = -1.0
+                    elif p >= p_hi and allow_l[t]:
+                        pos[t] = 1.0
+                    elif p <= p_lo and allow_s[t]:
+                        pos[t] = -1.0
+
+            pos_s = pos[min_train:]
+            r_b_s = r_bull[min_train:]
+            r_s_s = r_bear[min_train:]
+            rf_sub = rf_v[min_train:]
+
+            if not multi_day_hold:
+                # Overnight hold enters at 15:50 and exits at 09:30 every active day (pays full RT cost each trade)
+                net_ret = np.where(pos_s == 1.0, r_b_s - rt_cost, np.where(pos_s == -1.0, r_s_s - rt_cost, rf_sub))
+                ann_half_turns = (np.abs(pos_s) * 2.0).sum() * (252.0 / len(pos_s))
+            else:
+                # Multi-day 24h swing hold only pays half-turn cost when position changes!
+                half_turns = np.abs(np.diff(pos_s, prepend=0.0))
+                gross_ret = np.where(pos_s == 1.0, r_b_s, np.where(pos_s == -1.0, r_s_s, rf_sub))
+                net_ret = gross_ret - half_turns * half_turn_cost
+                ann_half_turns = half_turns.sum() * (252.0 / len(pos_s))
+
+            out = pd.DataFrame(
+                {"pos": pos_s, "prob": probs[min_train:], "strat_ret": net_ret},
+                index=df_valid.index[min_train:],
             )
-            out = pd.DataFrame({"pos": pos, "strat_ret": net_ret}, index=df.index)
-            return out.iloc[min_train:]
+            out.attrs["ann_rt_trades"] = ann_half_turns / 2.0
+            out.attrs["clf"] = clf
+            return out
 
-        s_l2_24h = sim_hierarchy("ret_24h_1550", "inv_ret_24h_1550", cost_1x, use_layer1=False)
-        s_2layer_24h_1x = sim_hierarchy("ret_24h_1550", "inv_ret_24h_1550", cost_1x, use_layer1=True)
-        s_2layer_24h_2x = sim_hierarchy("ret_24h_1550", "inv_ret_24h_1550", cost_1x * 2, use_layer1=True)
-        s_2layer_ovn_1x = sim_hierarchy("ret_ovn_1550", "inv_ret_ovn_1550", cost_1x, use_layer1=True)
-        s_2layer_ovn_2x = sim_hierarchy("ret_ovn_1550", "inv_ret_ovn_1550", cost_1x * 2, use_layer1=True)
+        ovn_1x = sim_engine("ret_ovn_1550", "inv_ret_ovn_1550", cost_1x, PROB_LONG_ENTRY, PROB_SHORT_ENTRY, False)
+        ovn_2x = sim_engine("ret_ovn_1550", "inv_ret_ovn_1550", cost_1x * 2, PROB_LONG_ENTRY, PROB_SHORT_ENTRY, False)
+        ovn_3x = sim_engine("ret_ovn_1550", "inv_ret_ovn_1550", cost_1x * 3, PROB_LONG_ENTRY, PROB_SHORT_ENTRY, False)
 
-        idx = s_2layer_24h_1x.index
-        bmk = df.loc[idx, "ret_24h_1550"]
+        swg_1x = sim_engine("ret_24h_1550", "inv_ret_24h_1550", cost_1x, PROB_LONG_ENTRY, PROB_SHORT_ENTRY, True)
+        swg_2x = sim_engine("ret_24h_1550", "inv_ret_24h_1550", cost_1x * 2, PROB_LONG_ENTRY, PROB_SHORT_ENTRY, True)
+        swg_3x = sim_engine("ret_24h_1550", "inv_ret_24h_1550", cost_1x * 3, PROB_LONG_ENTRY, PROB_SHORT_ENTRY, True)
 
+        results_by_pair[bull_etf] = {
+            "bmk": df_valid.loc[ovn_1x.index, "ret_24h_1550"],
+            "ovn_1x": ovn_1x,
+            "ovn_2x": ovn_2x,
+            "ovn_3x": ovn_3x,
+            "swg_1x": swg_1x,
+            "swg_2x": swg_2x,
+            "swg_3x": swg_3x,
+        }
+        live_models[bull_etf] = (ovn_1x.attrs["clf"], swg_1x.attrs["clf"], df.iloc[-1])
+
+        idx = ovn_1x.index
+        bmk = results_by_pair[bull_etf]["bmk"]
         print(f"\n=========================================================================================================")
-        print(f"  {bull_etf} / {bear_etf} (Underlying: {und_etf}) — 2-LAYER HIERARCHY RESULTS")
+        print(f"  {bull_etf} / {bear_etf} (Underlying: {und_etf}) — HARDENED 0.57/0.43 RESULTS (Jul 2020 - Nov 2026, {len(idx)} Days)")
+        print(f"  [Turnover]: Overnight Mode = {ovn_1x.attrs['ann_rt_trades']:.0f} RT/yr | Multi-Day Swing Mode = {swg_1x.attrs['ann_rt_trades']:.0f} RT/yr")
         print(f"=========================================================================================================")
-        for p_title, p_idx in [
-            ("2022 BEAR MARKET (Jan - Dec 2022)", idx[idx.year == 2022]),
-            ("UNTOUCHED 2020-2023 (Jul 2020 - Dec 2023)", idx[idx.year <= 2023]),
-            ("FULL 2020-2026 (Jul 2020 - Nov 2026)", idx),
+        print(f"  {'Strategy Variant':58s} | {'CAGR%':>7s} | {'MaxDD%':>7s} | {'Sharpe':>6s} | {'Beta':>5s} | {'Alpha%':>7s} | {'t-stat':>6s} | {'WorstMo':>8s} | {'MaxUW':>5s}")
+        print("  " + "-" * 130)
+        for lbl, s_r in [
+            (f"1. Benchmark: Buy & Hold {bull_etf} (24h)", bmk),
+            ("2. 2-Layer Overnight (0.57/0.43, Limit 1x Cost)", ovn_1x["strat_ret"]),
+            ("3. 2-Layer Overnight (0.57/0.43, 2x Cost)", ovn_2x["strat_ret"]),
+            ("4. 2-Layer Overnight (0.57/0.43, 3x Cost)", ovn_3x["strat_ret"]),
+            ("5. 2-Layer Multi-Day Swing Hold (0.57/0.43, 1x Cost)", swg_1x["strat_ret"]),
+            ("6. 2-Layer Multi-Day Swing Hold (0.57/0.43, 2x Cost)", swg_2x["strat_ret"]),
+            ("7. 2-Layer Multi-Day Swing Hold (0.57/0.43, 3x Cost)", swg_3x["strat_ret"]),
         ]:
-            print(f"\n  >>> {p_title} ({len(p_idx)} days) <<<")
-            print(f"  {'Strategy':56s} | {'CAGR%':>7s} | {'MaxDD%':>7s} | {'Sharpe':>6s} | {'Beta':>5s} | {'Alpha%':>7s} | {'t-stat':>6s} | {'MaxUW':>5s}")
-            print("  " + "-" * 120)
-            b_sub = bmk.loc[p_idx]
-            for lbl, s_r in [
-                (f"1. Buy & Hold {bull_etf}", b_sub),
-                ("2. Layer 2 Alone (TPO+CVD 24h, No Macro Filter)", s_l2_24h.loc[p_idx, "strat_ret"]),
-                ("3. 2-Layer Combined (Macro+FR-VWAP + TPO+CVD 24h, 1x)", s_2layer_24h_1x.loc[p_idx, "strat_ret"]),
-                ("4. 2-Layer Combined (Macro+FR-VWAP + TPO+CVD 24h, 2x)", s_2layer_24h_2x.loc[p_idx, "strat_ret"]),
-                ("5. 2-Layer Combined Overnight 15:50->09:30 (1x Cost)", s_2layer_ovn_1x.loc[p_idx, "strat_ret"]),
-                ("6. 2-Layer Combined Overnight 15:50->09:30 (2x Cost)", s_2layer_ovn_2x.loc[p_idx, "strat_ret"]),
-            ]:
-                m = compute_metrics(s_r, b_sub)
-                print(
-                    f"  {lbl:56s} | {m['cagr']:+6.1f}% | {m['max_dd']:+6.1f}% | {m['sharpe']:6.2f} | "
-                    f"{m['beta']:5.2f} | {m['alpha']:+6.1f}% | {m['t']:+6.2f} | {m['max_uw']:4d}d"
-                )
+            m = compute_metrics(s_r, bmk)
+            print(
+                f"  {lbl:58s} | {m['cagr']:+6.1f}% | {m['max_dd']:+6.1f}% | {m['sharpe']:6.2f} | "
+                f"{m['beta']:5.2f} | {m['alpha']:+6.1f}% | {m['t']:+6.2f} | {m['worst_mo']:+7.2f}% | {m['max_uw']:4d}d"
+            )
+
+    # =========================================================================
+    # COMBINED PORTFOLIO: 66.7% TQQQ/SQQQ (1.0x) + 33.3% SOXL/SOXS (0.5x Half-Size)
+    # =========================================================================
+    t_res = results_by_pair["TQQQ"]
+    s_res = results_by_pair["SOXL"]
+    c_idx = t_res["ovn_1x"].index.intersection(s_res["ovn_1x"].index)
+
+    bmk_port = WEIGHT_TQQQ * t_res["bmk"].loc[c_idx] + WEIGHT_SOXL * s_res["bmk"].loc[c_idx]
+    port_ovn_1x = WEIGHT_TQQQ * t_res["ovn_1x"].loc[c_idx, "strat_ret"] + WEIGHT_SOXL * s_res["ovn_1x"].loc[c_idx, "strat_ret"]
+    port_ovn_2x = WEIGHT_TQQQ * t_res["ovn_2x"].loc[c_idx, "strat_ret"] + WEIGHT_SOXL * s_res["ovn_2x"].loc[c_idx, "strat_ret"]
+    port_ovn_3x = WEIGHT_TQQQ * t_res["ovn_3x"].loc[c_idx, "strat_ret"] + WEIGHT_SOXL * s_res["ovn_3x"].loc[c_idx, "strat_ret"]
+
+    port_swg_1x = WEIGHT_TQQQ * t_res["swg_1x"].loc[c_idx, "strat_ret"] + WEIGHT_SOXL * s_res["swg_1x"].loc[c_idx, "strat_ret"]
+    port_swg_2x = WEIGHT_TQQQ * t_res["swg_2x"].loc[c_idx, "strat_ret"] + WEIGHT_SOXL * s_res["swg_2x"].loc[c_idx, "strat_ret"]
+    port_swg_3x = WEIGHT_TQQQ * t_res["swg_3x"].loc[c_idx, "strat_ret"] + WEIGHT_SOXL * s_res["swg_3x"].loc[c_idx, "strat_ret"]
+
+    # 50/50 Blend of Overnight Harvest + Multi-Day Swing Continuity
+    port_hybrid_1x = 0.50 * port_ovn_1x + 0.50 * port_swg_1x
+    port_hybrid_2x = 0.50 * port_ovn_2x + 0.50 * port_swg_2x
+    port_hybrid_3x = 0.50 * port_ovn_3x + 0.50 * port_swg_3x
+
+    print(f"\n=========================================================================================================")
+    print(f"  COMBINED PORTFOLIO: 66.7% TQQQ/SQQQ (1.0x) + 33.3% SOXL/SOXS (0.5x Half-Size) | Jul 2020 - Nov 2026")
+    print(f"=========================================================================================================")
+    print(f"  {'Portfolio Strategy':58s} | {'CAGR%':>7s} | {'MaxDD%':>7s} | {'Sharpe':>6s} | {'Beta':>5s} | {'Alpha%':>7s} | {'t-stat':>6s} | {'WorstMo':>8s} | {'MaxUW':>5s}")
+    print("  " + "-" * 130)
+    for lbl, s_r in [
+        ("1. Benchmark: 67% TQQQ + 33% SOXL Buy & Hold", bmk_port),
+        ("2. Combined 2-Layer Overnight (0.57/0.43, 1x Cost)", port_ovn_1x),
+        ("3. Combined 2-Layer Overnight (0.57/0.43, 2x Cost)", port_ovn_2x),
+        ("4. Combined 2-Layer Overnight (0.57/0.43, 3x Cost)", port_ovn_3x),
+        ("5. Combined 2-Layer Multi-Day Swing (0.57/0.43, 1x Cost)", port_swg_1x),
+        ("6. Combined 2-Layer Multi-Day Swing (0.57/0.43, 2x Cost)", port_swg_2x),
+        ("7. Combined 2-Layer Multi-Day Swing (0.57/0.43, 3x Cost)", port_swg_3x),
+        ("8. Combined Hybrid (50% Ovn + 50% Swing, 1x Cost)", port_hybrid_1x),
+        ("9. Combined Hybrid (50% Ovn + 50% Swing, 2x Cost)", port_hybrid_2x),
+        ("10. Combined Hybrid (50% Ovn + 50% Swing, 3x Cost)", port_hybrid_3x),
+    ]:
+        m = compute_metrics(s_r, bmk_port)
+        print(
+            f"  {lbl:58s} | {m['cagr']:+6.1f}% | {m['max_dd']:+6.1f}% | {m['sharpe']:6.2f} | "
+            f"{m['beta']:5.2f} | {m['alpha']:+6.1f}% | {m['t']:+6.2f} | {m['worst_mo']:+7.2f}% | {m['max_uw']:4d}d"
+        )
 
 
 if __name__ == "__main__":
