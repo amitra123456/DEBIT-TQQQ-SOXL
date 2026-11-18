@@ -1,0 +1,77 @@
+{
+  "window": "2025-11-11 to 2026-11-11 (Last 1 Year)",
+  "resolution": "1-Minute (1Min) Alpaca Stock Bars + 1-Minute OPRA Option Bars",
+  "SOXL_1Min": {
+    "trades": 11,
+    "wins": 8,
+    "losses": 3,
+    "win_rate_pct": 72.73,
+    "mean_win_roi_pct": 58.28,
+    "mean_loss_roi_pct": -20.76,
+    "median_roi_pct": 36.39,
+    "realized_option_rr": 2.81,
+    "profit_factor": 7.49,
+    "starting_equity": 100000.0,
+    "ending_equity": 117225.49,
+    "net_return_pct": 17.23,
+    "max_drawdown_pct": 1.68,
+    "total_1m_candles_evaluated": 1096,
+    "total_opra_1m_bars_loaded": 6874,
+    "mean_hold_days": 1.09,
+    "exit_breakdown": {
+      "INTRABAR_1MIN_GTC_85TP_FILL": 4,
+      "INTRABAR_1MIN_STOCK_TOUCH_TP": 4,
+      "INTRABAR_1MIN_SOXL_BREAKEVEN_STOP": 2,
+      "EOD_1530_1MIN_STRUCTURAL_STOP": 1
+    }
+  },
+  "TQQQ_1Min": {
+    "trades": 6,
+    "wins": 4,
+    "losses": 2,
+    "win_rate_pct": 66.67,
+    "mean_win_roi_pct": 31.11,
+    "mean_loss_roi_pct": -48.25,
+    "median_roi_pct": 24.47,
+    "realized_option_rr": 0.64,
+    "profit_factor": 1.29,
+    "starting_equity": 100000.0,
+    "ending_equity": 101041.3,
+    "net_return_pct": 1.04,
+    "max_drawdown_pct": 2.99,
+    "total_1m_candles_evaluated": 1456,
+    "total_opra_1m_bars_loaded": 9169,
+    "mean_hold_days": 1.17,
+    "exit_breakdown": {
+      "INTRABAR_1MIN_STOCK_TOUCH_TP": 3,
+      "INTRABAR_1MIN_GTC_85TP_FILL": 1,
+      "EOD_1530_1MIN_STRUCTURAL_STOP": 1,
+      "DAY1_1330_1MIN_ZERO_BOUNCE_EARLY_CUT": 1
+    }
+  },
+  "COMBINED_PORTFOLIO_1Min": {
+    "trades": 17,
+    "wins": 12,
+    "losses": 5,
+    "win_rate_pct": 70.59,
+    "mean_win_roi_pct": 49.23,
+    "mean_loss_roi_pct": -31.76,
+    "median_roi_pct": 33.97,
+    "realized_option_rr": 1.55,
+    "profit_factor": 3.72,
+    "starting_equity": 100000.0,
+    "ending_equity": 118446.16,
+    "net_return_pct": 18.45,
+    "max_drawdown_pct": 2.99,
+    "total_1m_candles_evaluated": 2552,
+    "total_opra_1m_bars_loaded": 16043,
+    "mean_hold_days": 1.12,
+    "exit_breakdown": {
+      "INTRABAR_1MIN_STOCK_TOUCH_TP": 7,
+      "INTRABAR_1MIN_GTC_85TP_FILL": 5,
+      "INTRABAR_1MIN_SOXL_BREAKEVEN_STOP": 2,
+      "EOD_1530_1MIN_STRUCTURAL_STOP": 2,
+      "DAY1_1330_1MIN_ZERO_BOUNCE_EARLY_CUT": 1
+    }
+  }
+}

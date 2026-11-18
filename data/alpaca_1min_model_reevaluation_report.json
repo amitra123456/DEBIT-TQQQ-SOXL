@@ -1,0 +1,914 @@
+{
+  "sleeve_breakdown_2024_2026": {
+    "SOXL::Phase1_VWAP5_RTH_Bull": {
+      "m1_intrabar": {
+        "trades": 21,
+        "wins": 14,
+        "losses": 7,
+        "win_rate_pct": 66.67,
+        "mean_win_pct": 39.94,
+        "mean_loss_pct": -19.35,
+        "rr": 2.06,
+        "pf": 4.13,
+        "net_ret_pct": 34.13,
+        "max_dd_pct": 6.5
+      },
+      "m2_eod_be": {
+        "trades": 21,
+        "wins": 15,
+        "losses": 6,
+        "win_rate_pct": 71.43,
+        "mean_win_pct": 59.8,
+        "mean_loss_pct": -20.42,
+        "rr": 2.93,
+        "pf": 7.32,
+        "net_ret_pct": 71.01,
+        "max_dd_pct": 6.12
+      },
+      "m3_hybrid": {
+        "trades": 21,
+        "wins": 15,
+        "losses": 6,
+        "win_rate_pct": 71.43,
+        "mean_win_pct": 53.45,
+        "mean_loss_pct": -11.97,
+        "rr": 4.47,
+        "pf": 11.17,
+        "net_ret_pct": 66.45,
+        "max_dd_pct": 2.5
+      }
+    },
+    "SOXL::Phase2_SMA50_SemiVel_Bull": {
+      "m1_intrabar": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "win_rate_pct": 60.0,
+        "mean_win_pct": 30.54,
+        "mean_loss_pct": -38.59,
+        "rr": 0.79,
+        "pf": 1.19,
+        "net_ret_pct": 0.88,
+        "max_dd_pct": 3.05
+      },
+      "m2_eod_be": {
+        "trades": 5,
+        "wins": 1,
+        "losses": 4,
+        "win_rate_pct": 20.0,
+        "mean_win_pct": 40.52,
+        "mean_loss_pct": -21.05,
+        "rr": 1.92,
+        "pf": 0.48,
+        "net_ret_pct": -3.19,
+        "max_dd_pct": 3.19
+      },
+      "m3_hybrid": {
+        "trades": 5,
+        "wins": 2,
+        "losses": 3,
+        "win_rate_pct": 40.0,
+        "mean_win_pct": 43.62,
+        "mean_loss_pct": -24.34,
+        "rr": 1.79,
+        "pf": 1.19,
+        "net_ret_pct": 0.86,
+        "max_dd_pct": 2.71
+      }
+    },
+    "SOXL::Phase3_EMA20_Coil_Bull": {
+      "m1_intrabar": {
+        "trades": 3,
+        "wins": 2,
+        "losses": 1,
+        "win_rate_pct": 66.67,
+        "mean_win_pct": 38.31,
+        "mean_loss_pct": -5.64,
+        "rr": 6.79,
+        "pf": 13.59,
+        "net_ret_pct": 5.11,
+        "max_dd_pct": 0.4
+      },
+      "m2_eod_be": {
+        "trades": 3,
+        "wins": 3,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 57.35,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 172040000000.0,
+        "net_ret_pct": 12.8,
+        "max_dd_pct": 0.0
+      },
+      "m3_hybrid": {
+        "trades": 3,
+        "wins": 3,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 46.71,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 140140000000.0,
+        "net_ret_pct": 10.34,
+        "max_dd_pct": 0.0
+      }
+    },
+    "SOXL::Phase4_SOXX_DipImpulse_Bull": {
+      "m1_intrabar": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate_pct": 50.0,
+        "mean_win_pct": 42.35,
+        "mean_loss_pct": -21.79,
+        "rr": 1.94,
+        "pf": 1.94,
+        "net_ret_pct": 2.85,
+        "max_dd_pct": 3.1
+      },
+      "m2_eod_be": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate_pct": 50.0,
+        "mean_win_pct": 40.72,
+        "mean_loss_pct": -21.25,
+        "rr": 1.92,
+        "pf": 1.92,
+        "net_ret_pct": 2.69,
+        "max_dd_pct": 3.03
+      },
+      "m3_hybrid": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate_pct": 50.0,
+        "mean_win_pct": 48.83,
+        "mean_loss_pct": -19.25,
+        "rr": 2.54,
+        "pf": 2.54,
+        "net_ret_pct": 4.16,
+        "max_dd_pct": 2.74
+      }
+    },
+    "SOXL::Phase5_DeepWashout_RTH_Bull": {
+      "m1_intrabar": {
+        "trades": 3,
+        "wins": 2,
+        "losses": 1,
+        "win_rate_pct": 66.67,
+        "mean_win_pct": 43.62,
+        "mean_loss_pct": -51.7,
+        "rr": 0.84,
+        "pf": 1.69,
+        "net_ret_pct": 2.4,
+        "max_dd_pct": 3.69
+      },
+      "m2_eod_be": {
+        "trades": 3,
+        "wins": 2,
+        "losses": 1,
+        "win_rate_pct": 66.67,
+        "mean_win_pct": 68.5,
+        "mean_loss_pct": -51.7,
+        "rr": 1.32,
+        "pf": 2.65,
+        "net_ret_pct": 5.96,
+        "max_dd_pct": 3.69
+      },
+      "m3_hybrid": {
+        "trades": 3,
+        "wins": 2,
+        "losses": 1,
+        "win_rate_pct": 66.67,
+        "mean_win_pct": 46.62,
+        "mean_loss_pct": -35.0,
+        "rr": 1.33,
+        "pf": 2.66,
+        "net_ret_pct": 4.1,
+        "max_dd_pct": 2.5
+      }
+    },
+    "SOXL::Phase6_ExhaustBreak_Bear": {
+      "m1_intrabar": {
+        "trades": 7,
+        "wins": 7,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 49.82,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 348720000000.0,
+        "net_ret_pct": 27.59,
+        "max_dd_pct": 0.0
+      },
+      "m2_eod_be": {
+        "trades": 7,
+        "wins": 6,
+        "losses": 1,
+        "win_rate_pct": 85.71,
+        "mean_win_pct": 68.44,
+        "mean_loss_pct": -3.5,
+        "rr": 19.55,
+        "pf": 117.33,
+        "net_ret_pct": 32.74,
+        "max_dd_pct": 0.25
+      },
+      "m3_hybrid": {
+        "trades": 7,
+        "wins": 7,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 55.71,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 389990000000.0,
+        "net_ret_pct": 31.34,
+        "max_dd_pct": 0.0
+      }
+    },
+    "SOXL::Phase7_GEX_PutWall_Reclaim_Bull": {
+      "m1_intrabar": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 25.64,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 25640000000.0,
+        "net_ret_pct": 1.83,
+        "max_dd_pct": 0.0
+      },
+      "m2_eod_be": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 31.79,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 31790000000.0,
+        "net_ret_pct": 2.27,
+        "max_dd_pct": 0.0
+      },
+      "m3_hybrid": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 41.94,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 41940000000.0,
+        "net_ret_pct": 3.0,
+        "max_dd_pct": 0.0
+      }
+    },
+    "TQQQ::Phase1_VWAP5_VCP_Bull": {
+      "m1_intrabar": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate_pct": 50.0,
+        "mean_win_pct": 27.27,
+        "mean_loss_pct": -19.28,
+        "rr": 1.41,
+        "pf": 1.41,
+        "net_ret_pct": 1.09,
+        "max_dd_pct": 2.74
+      },
+      "m2_eod_be": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate_pct": 50.0,
+        "mean_win_pct": 35.95,
+        "mean_loss_pct": -19.28,
+        "rr": 1.86,
+        "pf": 1.86,
+        "net_ret_pct": 2.32,
+        "max_dd_pct": 2.74
+      },
+      "m3_hybrid": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate_pct": 50.0,
+        "mean_win_pct": 27.27,
+        "mean_loss_pct": -19.28,
+        "rr": 1.41,
+        "pf": 1.41,
+        "net_ret_pct": 1.09,
+        "max_dd_pct": 2.74
+      }
+    },
+    "TQQQ::Phase2_SMA100_EMA20_RTH_Bull": {
+      "m1_intrabar": {
+        "trades": 13,
+        "wins": 9,
+        "losses": 4,
+        "win_rate_pct": 69.23,
+        "mean_win_pct": 52.45,
+        "mean_loss_pct": -39.72,
+        "rr": 1.32,
+        "pf": 2.97,
+        "net_ret_pct": 23.76,
+        "max_dd_pct": 6.44
+      },
+      "m2_eod_be": {
+        "trades": 13,
+        "wins": 7,
+        "losses": 6,
+        "win_rate_pct": 53.85,
+        "mean_win_pct": 60.58,
+        "mean_loss_pct": -47.2,
+        "rr": 1.28,
+        "pf": 1.5,
+        "net_ret_pct": 8.98,
+        "max_dd_pct": 13.77
+      },
+      "m3_hybrid": {
+        "trades": 13,
+        "wins": 9,
+        "losses": 4,
+        "win_rate_pct": 69.23,
+        "mean_win_pct": 52.45,
+        "mean_loss_pct": -28.43,
+        "rr": 1.84,
+        "pf": 4.15,
+        "net_ret_pct": 28.0,
+        "max_dd_pct": 3.26
+      }
+    },
+    "TQQQ::Phase3_EMA20_Reclaim_Bull": {
+      "m1_intrabar": {
+        "trades": 14,
+        "wins": 11,
+        "losses": 3,
+        "win_rate_pct": 78.57,
+        "mean_win_pct": 48.78,
+        "mean_loss_pct": -38.11,
+        "rr": 1.28,
+        "pf": 4.69,
+        "net_ret_pct": 33.75,
+        "max_dd_pct": 4.94
+      },
+      "m2_eod_be": {
+        "trades": 14,
+        "wins": 7,
+        "losses": 7,
+        "win_rate_pct": 50.0,
+        "mean_win_pct": 71.05,
+        "mean_loss_pct": -53.75,
+        "rr": 1.32,
+        "pf": 1.32,
+        "net_ret_pct": 7.03,
+        "max_dd_pct": 13.88
+      },
+      "m3_hybrid": {
+        "trades": 14,
+        "wins": 11,
+        "losses": 3,
+        "win_rate_pct": 78.57,
+        "mean_win_pct": 48.78,
+        "mean_loss_pct": -26.72,
+        "rr": 1.83,
+        "pf": 6.69,
+        "net_ret_pct": 37.18,
+        "max_dd_pct": 2.5
+      }
+    },
+    "TQQQ::Phase4_QQQ_DipImpulse_Bull": {
+      "m1_intrabar": {
+        "trades": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 28.31,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 56620000000.0,
+        "net_ret_pct": 4.09,
+        "max_dd_pct": 0.0
+      },
+      "m2_eod_be": {
+        "trades": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 52.84,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 105670000000.0,
+        "net_ret_pct": 7.66,
+        "max_dd_pct": 0.0
+      },
+      "m3_hybrid": {
+        "trades": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 28.31,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 56620000000.0,
+        "net_ret_pct": 4.09,
+        "max_dd_pct": 0.0
+      }
+    },
+    "TQQQ::Phase5_Turnaround_RTH21_Bull": {
+      "m1_intrabar": {
+        "trades": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 47.23,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 94460000000.0,
+        "net_ret_pct": 6.86,
+        "max_dd_pct": 0.0
+      },
+      "m2_eod_be": {
+        "trades": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 63.43,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 126870000000.0,
+        "net_ret_pct": 9.27,
+        "max_dd_pct": 0.0
+      },
+      "m3_hybrid": {
+        "trades": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 47.23,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 94460000000.0,
+        "net_ret_pct": 6.86,
+        "max_dd_pct": 0.0
+      }
+    },
+    "TQQQ::Phase6_SMA200_Breakdown_Bear": {
+      "m1_intrabar": {
+        "trades": 3,
+        "wins": 3,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 99.63,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 298900000000.0,
+        "net_ret_pct": 22.64,
+        "max_dd_pct": 0.0
+      },
+      "m2_eod_be": {
+        "trades": 3,
+        "wins": 3,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 126.64,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 379920000000.0,
+        "net_ret_pct": 29.18,
+        "max_dd_pct": 0.0
+      },
+      "m3_hybrid": {
+        "trades": 3,
+        "wins": 3,
+        "losses": 0,
+        "win_rate_pct": 100.0,
+        "mean_win_pct": 99.63,
+        "mean_loss_pct": 0.0,
+        "rr": 99.0,
+        "pf": 298900000000.0,
+        "net_ret_pct": 22.64,
+        "max_dd_pct": 0.0
+      }
+    },
+    "TQQQ::Phase7_GEX_PutWall_Reclaim_Bull": {
+      "m1_intrabar": {
+        "trades": 4,
+        "wins": 1,
+        "losses": 3,
+        "win_rate_pct": 25.0,
+        "mean_win_pct": 70.86,
+        "mean_loss_pct": -37.54,
+        "rr": 1.89,
+        "pf": 0.63,
+        "net_ret_pct": -3.24,
+        "max_dd_pct": 7.9
+      },
+      "m2_eod_be": {
+        "trades": 4,
+        "wins": 1,
+        "losses": 3,
+        "win_rate_pct": 25.0,
+        "mean_win_pct": 32.12,
+        "mean_loss_pct": -40.44,
+        "rr": 0.79,
+        "pf": 0.26,
+        "net_ret_pct": -6.38,
+        "max_dd_pct": 8.48
+      },
+      "m3_hybrid": {
+        "trades": 4,
+        "wins": 1,
+        "losses": 3,
+        "win_rate_pct": 25.0,
+        "mean_win_pct": 70.86,
+        "mean_loss_pct": -37.54,
+        "rr": 1.89,
+        "pf": 0.63,
+        "net_ret_pct": -3.24,
+        "max_dd_pct": 7.9
+      }
+    }
+  },
+  "windows": {
+    "Last_1_Year_2025_11_to_2026_11": {
+      "SOXL": {
+        "Model_1_Baseline_7Sleeve_IntrabarBE": {
+          "trades": 22,
+          "wins": 15,
+          "losses": 7,
+          "win_rate_pct": 68.18,
+          "mean_win_pct": 43.54,
+          "mean_loss_pct": -26.84,
+          "rr": 1.62,
+          "pf": 3.48,
+          "net_ret_pct": 37.83,
+          "max_dd_pct": 6.12
+        },
+        "Model_1B_7Sleeve_EOD_BE": {
+          "trades": 22,
+          "wins": 16,
+          "losses": 6,
+          "win_rate_pct": 72.73,
+          "mean_win_pct": 59.51,
+          "mean_loss_pct": -29.64,
+          "rr": 2.01,
+          "pf": 5.35,
+          "net_ret_pct": 70.71,
+          "max_dd_pct": 6.12
+        },
+        "Model_1C_7Sleeve_Hybrid_1Min_Exec": {
+          "trades": 22,
+          "wins": 16,
+          "losses": 6,
+          "win_rate_pct": 72.73,
+          "mean_win_pct": 55.67,
+          "mean_loss_pct": -19.25,
+          "rr": 2.89,
+          "pf": 7.71,
+          "net_ret_pct": 71.52,
+          "max_dd_pct": 2.5
+        },
+        "Model_2_5Sleeve_Paper_Hybrid_Exec": {
+          "trades": 17,
+          "wins": 14,
+          "losses": 3,
+          "win_rate_pct": 82.35,
+          "mean_win_pct": 56.65,
+          "mean_loss_pct": -14.0,
+          "rr": 4.05,
+          "pf": 18.88,
+          "net_ret_pct": 68.89,
+          "max_dd_pct": 2.5
+        },
+        "Model_3_1Min_Calibrated_Sleeves_Plus_1520_NoFreefall": {
+          "trades": 15,
+          "wins": 12,
+          "losses": 3,
+          "win_rate_pct": 80.0,
+          "mean_win_pct": 59.29,
+          "mean_loss_pct": -14.0,
+          "rr": 4.24,
+          "pf": 16.94,
+          "net_ret_pct": 59.48,
+          "max_dd_pct": 2.5
+        }
+      },
+      "TQQQ": {
+        "Model_1_Baseline_7Sleeve_IntrabarBE": {
+          "trades": 12,
+          "wins": 9,
+          "losses": 3,
+          "win_rate_pct": 75.0,
+          "mean_win_pct": 46.97,
+          "mean_loss_pct": -41.21,
+          "rr": 1.14,
+          "pf": 3.42,
+          "net_ret_pct": 22.59,
+          "max_dd_pct": 4.94
+        },
+        "Model_1B_7Sleeve_EOD_BE": {
+          "trades": 12,
+          "wins": 7,
+          "losses": 5,
+          "win_rate_pct": 58.33,
+          "mean_win_pct": 70.72,
+          "mean_loss_pct": -48.81,
+          "rr": 1.45,
+          "pf": 2.03,
+          "net_ret_pct": 17.41,
+          "max_dd_pct": 11.15
+        },
+        "Model_1C_7Sleeve_Hybrid_1Min_Exec": {
+          "trades": 12,
+          "wins": 9,
+          "losses": 3,
+          "win_rate_pct": 75.0,
+          "mean_win_pct": 46.97,
+          "mean_loss_pct": -29.77,
+          "rr": 1.58,
+          "pf": 4.73,
+          "net_ret_pct": 25.75,
+          "max_dd_pct": 3.84
+        },
+        "Model_2_5Sleeve_Paper_Hybrid_Exec": {
+          "trades": 9,
+          "wins": 7,
+          "losses": 2,
+          "win_rate_pct": 77.78,
+          "mean_win_pct": 50.15,
+          "mean_loss_pct": -27.15,
+          "rr": 1.85,
+          "pf": 6.47,
+          "net_ret_pct": 22.65,
+          "max_dd_pct": 3.84
+        },
+        "Model_3_1Min_Calibrated_Sleeves_Plus_1520_NoFreefall": {
+          "trades": 8,
+          "wins": 6,
+          "losses": 2,
+          "win_rate_pct": 75.0,
+          "mean_win_pct": 50.06,
+          "mean_loss_pct": -35.0,
+          "rr": 1.43,
+          "pf": 4.29,
+          "net_ret_pct": 17.02,
+          "max_dd_pct": 3.5
+        }
+      },
+      "COMBINED": {
+        "Model_1_Baseline_7Sleeve_IntrabarBE": {
+          "trades": 34,
+          "wins": 24,
+          "losses": 10,
+          "win_rate_pct": 70.59,
+          "mean_win_pct": 44.83,
+          "mean_loss_pct": -31.15,
+          "rr": 1.44,
+          "pf": 3.45,
+          "net_ret_pct": 68.96,
+          "max_dd_pct": 7.52
+        },
+        "Model_1B_7Sleeve_EOD_BE": {
+          "trades": 34,
+          "wins": 23,
+          "losses": 11,
+          "win_rate_pct": 67.65,
+          "mean_win_pct": 62.92,
+          "mean_loss_pct": -38.36,
+          "rr": 1.64,
+          "pf": 3.43,
+          "net_ret_pct": 100.42,
+          "max_dd_pct": 11.15
+        },
+        "Model_1C_7Sleeve_Hybrid_1Min_Exec": {
+          "trades": 34,
+          "wins": 25,
+          "losses": 9,
+          "win_rate_pct": 73.53,
+          "mean_win_pct": 52.54,
+          "mean_loss_pct": -22.76,
+          "rr": 2.31,
+          "pf": 6.41,
+          "net_ret_pct": 115.69,
+          "max_dd_pct": 2.5
+        },
+        "Model_2_5Sleeve_Paper_Hybrid_Exec": {
+          "trades": 26,
+          "wins": 21,
+          "losses": 5,
+          "win_rate_pct": 80.77,
+          "mean_win_pct": 54.48,
+          "mean_loss_pct": -19.26,
+          "rr": 2.83,
+          "pf": 11.88,
+          "net_ret_pct": 107.14,
+          "max_dd_pct": 2.5
+        },
+        "Model_3_1Min_Calibrated_Sleeves_Plus_1520_NoFreefall": {
+          "trades": 23,
+          "wins": 18,
+          "losses": 5,
+          "win_rate_pct": 78.26,
+          "mean_win_pct": 56.21,
+          "mean_loss_pct": -22.4,
+          "rr": 2.51,
+          "pf": 9.03,
+          "net_ret_pct": 86.62,
+          "max_dd_pct": 2.5
+        }
+      }
+    },
+    "Full_OPRA_1Min_Era_2024_to_2026": {
+      "SOXL": {
+        "Model_1_Baseline_7Sleeve_IntrabarBE": {
+          "trades": 44,
+          "wins": 31,
+          "losses": 13,
+          "win_rate_pct": 70.45,
+          "mean_win_pct": 41.09,
+          "mean_loss_pct": -24.12,
+          "rr": 1.7,
+          "pf": 4.06,
+          "net_ret_pct": 94.61,
+          "max_dd_pct": 6.12
+        },
+        "Model_1B_7Sleeve_EOD_BE": {
+          "trades": 44,
+          "wins": 30,
+          "losses": 14,
+          "win_rate_pct": 68.18,
+          "mean_win_pct": 59.02,
+          "mean_loss_pct": -21.74,
+          "rr": 2.71,
+          "pf": 5.82,
+          "net_ret_pct": 175.86,
+          "max_dd_pct": 6.12
+        },
+        "Model_1C_7Sleeve_Hybrid_1Min_Exec": {
+          "trades": 44,
+          "wins": 32,
+          "losses": 12,
+          "win_rate_pct": 72.73,
+          "mean_win_pct": 51.62,
+          "mean_loss_pct": -18.19,
+          "rr": 2.84,
+          "pf": 7.57,
+          "net_ret_pct": 171.73,
+          "max_dd_pct": 4.29
+        },
+        "Model_2_5Sleeve_Paper_Hybrid_Exec": {
+          "trades": 32,
+          "wins": 26,
+          "losses": 6,
+          "win_rate_pct": 81.25,
+          "mean_win_pct": 52.84,
+          "mean_loss_pct": -11.97,
+          "rr": 4.41,
+          "pf": 19.13,
+          "net_ret_pct": 148.46,
+          "max_dd_pct": 2.5
+        },
+        "Model_3_1Min_Calibrated_Sleeves_Plus_1520_NoFreefall": {
+          "trades": 33,
+          "wins": 26,
+          "losses": 7,
+          "win_rate_pct": 78.79,
+          "mean_win_pct": 53.29,
+          "mean_loss_pct": -15.26,
+          "rr": 3.49,
+          "pf": 12.97,
+          "net_ret_pct": 144.23,
+          "max_dd_pct": 2.5
+        }
+      },
+      "TQQQ": {
+        "Model_1_Baseline_7Sleeve_IntrabarBE": {
+          "trades": 42,
+          "wins": 30,
+          "losses": 12,
+          "win_rate_pct": 71.43,
+          "mean_win_pct": 52.8,
+          "mean_loss_pct": -35.37,
+          "rr": 1.49,
+          "pf": 3.73,
+          "net_ret_pct": 120.85,
+          "max_dd_pct": 12.37
+        },
+        "Model_1B_7Sleeve_EOD_BE": {
+          "trades": 42,
+          "wins": 24,
+          "losses": 18,
+          "win_rate_pct": 57.14,
+          "mean_win_pct": 68.24,
+          "mean_loss_pct": -45.52,
+          "rr": 1.5,
+          "pf": 2.0,
+          "net_ret_pct": 69.81,
+          "max_dd_pct": 25.7
+        },
+        "Model_1C_7Sleeve_Hybrid_1Min_Exec": {
+          "trades": 42,
+          "wins": 30,
+          "losses": 12,
+          "win_rate_pct": 71.43,
+          "mean_win_pct": 52.8,
+          "mean_loss_pct": -28.75,
+          "rr": 1.84,
+          "pf": 4.59,
+          "net_ret_pct": 134.27,
+          "max_dd_pct": 9.38
+        },
+        "Model_2_5Sleeve_Paper_Hybrid_Exec": {
+          "trades": 26,
+          "wins": 17,
+          "losses": 9,
+          "win_rate_pct": 65.38,
+          "mean_win_pct": 56.06,
+          "mean_loss_pct": -29.43,
+          "rr": 1.9,
+          "pf": 3.6,
+          "net_ret_pct": 59.82,
+          "max_dd_pct": 10.31
+        },
+        "Model_3_1Min_Calibrated_Sleeves_Plus_1520_NoFreefall": {
+          "trades": 33,
+          "wins": 26,
+          "losses": 7,
+          "win_rate_pct": 78.79,
+          "mean_win_pct": 54.96,
+          "mean_loss_pct": -27.7,
+          "rr": 1.98,
+          "pf": 7.37,
+          "net_ret_pct": 134.53,
+          "max_dd_pct": 3.89
+        }
+      },
+      "COMBINED": {
+        "Model_1_Baseline_7Sleeve_IntrabarBE": {
+          "trades": 86,
+          "wins": 61,
+          "losses": 25,
+          "win_rate_pct": 70.93,
+          "mean_win_pct": 46.85,
+          "mean_loss_pct": -29.52,
+          "rr": 1.59,
+          "pf": 3.87,
+          "net_ret_pct": 329.8,
+          "max_dd_pct": 14.57
+        },
+        "Model_1B_7Sleeve_EOD_BE": {
+          "trades": 86,
+          "wins": 54,
+          "losses": 32,
+          "win_rate_pct": 62.79,
+          "mean_win_pct": 63.12,
+          "mean_loss_pct": -35.12,
+          "rr": 1.8,
+          "pf": 3.03,
+          "net_ret_pct": 368.43,
+          "max_dd_pct": 17.95
+        },
+        "Model_1C_7Sleeve_Hybrid_1Min_Exec": {
+          "trades": 86,
+          "wins": 62,
+          "losses": 24,
+          "win_rate_pct": 72.09,
+          "mean_win_pct": 52.19,
+          "mean_loss_pct": -23.47,
+          "rr": 2.22,
+          "pf": 5.74,
+          "net_ret_pct": 536.58,
+          "max_dd_pct": 9.38
+        },
+        "Model_2_5Sleeve_Paper_Hybrid_Exec": {
+          "trades": 58,
+          "wins": 43,
+          "losses": 15,
+          "win_rate_pct": 74.14,
+          "mean_win_pct": 54.11,
+          "mean_loss_pct": -22.45,
+          "rr": 2.41,
+          "pf": 6.91,
+          "net_ret_pct": 297.08,
+          "max_dd_pct": 8.07
+        },
+        "Model_3_1Min_Calibrated_Sleeves_Plus_1520_NoFreefall": {
+          "trades": 66,
+          "wins": 52,
+          "losses": 14,
+          "win_rate_pct": 78.79,
+          "mean_win_pct": 54.12,
+          "mean_loss_pct": -21.48,
+          "rr": 2.52,
+          "pf": 9.36,
+          "net_ret_pct": 472.81,
+          "max_dd_pct": 3.89
+        }
+      }
+    }
+  }
+}

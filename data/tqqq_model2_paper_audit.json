@@ -1,0 +1,218 @@
+{
+  "model_name": "Model 2 (Paper Trade): Modern 4-Yr Pruned 5-Sleeve + -18% Option Stop",
+  "kept_sleeves": [
+    "Phase1_VWAP5_VCP_Bull",
+    "Phase2_SMA100_EMA20_RTH_Bull",
+    "Phase3_EMA20_Reclaim_Bull",
+    "Phase4_QQQ_DipImpulse_Bull",
+    "Phase6_SMA200_Breakdown_Bear"
+  ],
+  "dropped_sleeves": [
+    "Phase5_Turnaround_RTH21_Bull",
+    "Phase7_GEX_PutWall_Reclaim_Bull"
+  ],
+  "summary": {
+    "Train_2021_2024": {
+      "trades": 52,
+      "wins": 42,
+      "losses": 10,
+      "win_rate_pct": 80.77,
+      "mean_win_roi_pct": 80.67,
+      "mean_loss_roi_pct": -26.19,
+      "realized_option_rr": 3.08,
+      "profit_factor": 12.94,
+      "net_return_pct": 1636.55,
+      "ending_equity_100k": 1736545.54,
+      "max_drawdown_pct": 6.67,
+      "mean_theta_decay_pct": -13.14,
+      "mean_comm_drag_pct": 2.65,
+      "median_hold_days": 1.0,
+      "mean_hold_days": 1.23
+    },
+    "OOS_2023_2026": {
+      "trades": 60,
+      "wins": 51,
+      "losses": 9,
+      "win_rate_pct": 85.0,
+      "mean_win_roi_pct": 81.21,
+      "mean_loss_roi_pct": -19.7,
+      "realized_option_rr": 4.12,
+      "profit_factor": 23.35,
+      "net_return_pct": 11580.6,
+      "ending_equity_100k": 11680600.01,
+      "max_drawdown_pct": 3.84,
+      "mean_theta_decay_pct": -9.76,
+      "mean_comm_drag_pct": 2.4,
+      "median_hold_days": 1.0,
+      "mean_hold_days": 1.17
+    },
+    "Blind_Test_2025_2026": {
+      "trades": 21,
+      "wins": 18,
+      "losses": 3,
+      "win_rate_pct": 85.71,
+      "mean_win_roi_pct": 80.68,
+      "mean_loss_roi_pct": -20.43,
+      "realized_option_rr": 3.95,
+      "profit_factor": 23.69,
+      "net_return_pct": 403.07,
+      "ending_equity_100k": 503068.66,
+      "max_drawdown_pct": 3.71,
+      "mean_theta_decay_pct": -7.35,
+      "mean_comm_drag_pct": 1.01,
+      "median_hold_days": 1.0,
+      "mean_hold_days": 1.14
+    },
+    "2023": {
+      "trades": 22,
+      "wins": 20,
+      "losses": 2,
+      "win_rate_pct": 90.91,
+      "mean_win_roi_pct": 81.0,
+      "mean_loss_roi_pct": -17.04,
+      "realized_option_rr": 4.75,
+      "profit_factor": 47.53,
+      "net_return_pct": 791.31,
+      "ending_equity_100k": 891308.31,
+      "max_drawdown_pct": 2.69,
+      "mean_theta_decay_pct": -8.71,
+      "mean_comm_drag_pct": 4.26,
+      "median_hold_days": 1.0,
+      "mean_hold_days": 1.23
+    },
+    "2024": {
+      "trades": 17,
+      "wins": 13,
+      "losses": 4,
+      "win_rate_pct": 76.47,
+      "mean_win_roi_pct": 82.27,
+      "mean_loss_roi_pct": -20.49,
+      "realized_option_rr": 4.01,
+      "profit_factor": 13.05,
+      "net_return_pct": 212.27,
+      "ending_equity_100k": 312271.32,
+      "max_drawdown_pct": 3.4,
+      "mean_theta_decay_pct": -14.08,
+      "mean_comm_drag_pct": 1.72,
+      "median_hold_days": 1.0,
+      "mean_hold_days": 1.12
+    },
+    "2025": {
+      "trades": 11,
+      "wins": 10,
+      "losses": 1,
+      "win_rate_pct": 90.91,
+      "mean_win_roi_pct": 73.56,
+      "mean_loss_roi_pct": -15.5,
+      "realized_option_rr": 4.75,
+      "profit_factor": 47.46,
+      "net_return_pct": 198.56,
+      "ending_equity_100k": 298556.93,
+      "max_drawdown_pct": 2.5,
+      "mean_theta_decay_pct": -6.0,
+      "mean_comm_drag_pct": 1.07,
+      "median_hold_days": 1.0,
+      "mean_hold_days": 1.09
+    },
+    "2026": {
+      "trades": 10,
+      "wins": 8,
+      "losses": 2,
+      "win_rate_pct": 80.0,
+      "mean_win_roi_pct": 89.58,
+      "mean_loss_roi_pct": -22.89,
+      "realized_option_rr": 3.91,
+      "profit_factor": 15.65,
+      "net_return_pct": 100.36,
+      "ending_equity_100k": 200358.08,
+      "max_drawdown_pct": 3.31,
+      "mean_theta_decay_pct": -8.84,
+      "mean_comm_drag_pct": 0.94,
+      "median_hold_days": 1.0,
+      "mean_hold_days": 1.2
+    }
+  },
+  "filtered_out_oos_trades": [
+    {
+      "date": "2023-02-16",
+      "exit_date": "2023-02-17",
+      "sleeve": "Phase5_Turnaround_RTH21_Bull",
+      "strikes": "$11.25 / $12.50",
+      "m1_win": false,
+      "m1_opt_roi_pct": -18.5
+    },
+    {
+      "date": "2023-07-10",
+      "exit_date": "2023-07-11",
+      "sleeve": "Phase5_Turnaround_RTH21_Bull",
+      "strikes": "$18.75 / $20.00",
+      "m1_win": true,
+      "m1_opt_roi_pct": 82.7
+    },
+    {
+      "date": "2024-10-23",
+      "exit_date": "2024-10-24",
+      "sleeve": "Phase7_GEX_PutWall_Reclaim_Bull",
+      "strikes": "$35.00 / $36.25",
+      "m1_win": true,
+      "m1_opt_roi_pct": 104.2
+    },
+    {
+      "date": "2024-11-15",
+      "exit_date": "2024-11-18",
+      "sleeve": "Phase7_GEX_PutWall_Reclaim_Bull",
+      "strikes": "$36.25 / $37.50",
+      "m1_win": true,
+      "m1_opt_roi_pct": 104.2
+    },
+    {
+      "date": "2025-02-21",
+      "exit_date": "2025-02-24",
+      "sleeve": "Phase7_GEX_PutWall_Reclaim_Bull",
+      "strikes": "$41.25 / $42.50",
+      "m1_win": false,
+      "m1_opt_roi_pct": -31.4
+    },
+    {
+      "date": "2025-05-23",
+      "exit_date": "2025-05-27",
+      "sleeve": "Phase5_Turnaround_RTH21_Bull",
+      "strikes": "$32.50 / $33.75",
+      "m1_win": true,
+      "m1_opt_roi_pct": 104.2
+    },
+    {
+      "date": "2026-06-05",
+      "exit_date": "2026-06-08",
+      "sleeve": "Phase7_GEX_PutWall_Reclaim_Bull",
+      "strikes": "$72.50 / $75.00",
+      "m1_win": true,
+      "m1_opt_roi_pct": 104.7
+    },
+    {
+      "date": "2026-08-26",
+      "exit_date": "2026-08-27",
+      "sleeve": "Phase5_Turnaround_RTH21_Bull",
+      "strikes": "$70.00 / $72.50",
+      "m1_win": true,
+      "m1_opt_roi_pct": 104.7
+    }
+  ],
+  "latest_paper_signal": {
+    "date": "2026-11-11",
+    "entry_time": "3:30 PM ET",
+    "sleeve": "Phase1_VWAP5_VCP_Bull",
+    "status": "ACTIVE PAPER TRADE (MATCHES MODEL 1)",
+    "type": "Bull Call Spread",
+    "strikes": "$60.00 / $62.50",
+    "entry_px": 60.42,
+    "curr_px": 61.13,
+    "sl_px": 58.65,
+    "tp_px": 62.51,
+    "opt_stop_pct": -18.0,
+    "opt_tp_limit": 2.125,
+    "entry_mid": 1.12,
+    "mark_mid": 1.685,
+    "open_roi_pct": 50.0
+  }
+}

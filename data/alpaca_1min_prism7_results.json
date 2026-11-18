@@ -1,0 +1,82 @@
+{
+  "window": "2025-11-11 to 2026-11-11 (Last 1 Year)",
+  "resolution": "1-Minute (1Min) Alpaca Stock Bars + 1-Minute OPRA Option Bars",
+  "SOXL_1Min": {
+    "trades": 21,
+    "wins": 14,
+    "losses": 7,
+    "win_rate_pct": 66.67,
+    "mean_win_roi_pct": 32.46,
+    "mean_loss_roi_pct": -28.24,
+    "median_roi_pct": 17.69,
+    "realized_option_rr": 1.15,
+    "profit_factor": 2.3,
+    "starting_equity": 100000.0,
+    "ending_equity": 109221.62,
+    "net_return_pct": 9.22,
+    "max_drawdown_pct": 2.69,
+    "total_1m_candles_evaluated": 3052,
+    "total_opra_1m_bars_loaded": 10616,
+    "mean_hold_days": 1.1,
+    "exit_breakdown": {
+      "INTRABAR_1MIN_STOCK_TOUCH_TP": 10,
+      "DAY1_1330_1MIN_SOXL_ZERO_BOUNCE_EARLY_CUT": 3,
+      "INTRABAR_1MIN_OPT_MARK_45TP_FILL": 3,
+      "EOD_1530_1MIN_STRUCTURAL_STOP": 2,
+      "INTRABAR_1MIN_SOXL_BREAKEVEN_STOP": 2,
+      "INTRABAR_1MIN_GTC_85TP_FILL": 1
+    }
+  },
+  "TQQQ_1Min": {
+    "trades": 19,
+    "wins": 12,
+    "losses": 7,
+    "win_rate_pct": 63.16,
+    "mean_win_roi_pct": 22.44,
+    "mean_loss_roi_pct": -25.82,
+    "median_roi_pct": 10.28,
+    "realized_option_rr": 0.87,
+    "profit_factor": 1.49,
+    "starting_equity": 100000.0,
+    "ending_equity": 103063.28,
+    "net_return_pct": 3.06,
+    "max_drawdown_pct": 1.88,
+    "total_1m_candles_evaluated": 5855,
+    "total_opra_1m_bars_loaded": 38345,
+    "mean_hold_days": 1.37,
+    "exit_breakdown": {
+      "INTRABAR_1MIN_STOCK_TOUCH_TP": 10,
+      "DAY1_1330_1MIN_TQQQ_ZERO_BOUNCE_EARLY_CUT": 5,
+      "EOD_1530_1MIN_STRUCTURAL_STOP": 2,
+      "INTRABAR_1MIN_OPT_MARK_45TP_FILL": 1,
+      "INTRABAR_1MIN_GTC_85TP_FILL": 1
+    }
+  },
+  "COMBINED_PORTFOLIO_1Min": {
+    "trades": 40,
+    "wins": 26,
+    "losses": 14,
+    "win_rate_pct": 65.0,
+    "mean_win_roi_pct": 27.83,
+    "mean_loss_roi_pct": -27.03,
+    "median_roi_pct": 12.37,
+    "realized_option_rr": 1.03,
+    "profit_factor": 1.91,
+    "starting_equity": 100000.0,
+    "ending_equity": 112567.39,
+    "net_return_pct": 12.57,
+    "max_drawdown_pct": 3.38,
+    "total_1m_candles_evaluated": 8907,
+    "total_opra_1m_bars_loaded": 48961,
+    "mean_hold_days": 1.23,
+    "exit_breakdown": {
+      "INTRABAR_1MIN_STOCK_TOUCH_TP": 20,
+      "DAY1_1330_1MIN_TQQQ_ZERO_BOUNCE_EARLY_CUT": 5,
+      "INTRABAR_1MIN_OPT_MARK_45TP_FILL": 4,
+      "EOD_1530_1MIN_STRUCTURAL_STOP": 4,
+      "DAY1_1330_1MIN_SOXL_ZERO_BOUNCE_EARLY_CUT": 3,
+      "INTRABAR_1MIN_GTC_85TP_FILL": 2,
+      "INTRABAR_1MIN_SOXL_BREAKEVEN_STOP": 2
+    }
+  }
+}
