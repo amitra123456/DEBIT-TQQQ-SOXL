@@ -75,6 +75,8 @@ C:\Python314\python.exe -m soxl_tqqq_debit_330.backtest.walk_forward_audit
 
 ## JANUS-5 / UMB / FR-VWAP + 15:50 TPO & 1m Delta Flow (CVD) Sniper Suite (`janus5_umb_tpo_cvd/`)
 
+* **[Strategy Manual: Entry, Exit, & Trade Management with Flowcharts (`docs/JANUS5_UMB_TPO_CVD_STRATEGY_AND_TRADE_MANAGEMENT.md`)](./docs/JANUS5_UMB_TPO_CVD_STRATEGY_AND_TRADE_MANAGEMENT.md)** — Complete specification of the 2-Layer Hierarchy, Bull/Bear entry archetypes, `15:50 ET` vs. `10:00 AM ET` `TPO + 1m CVD` execution gates, profit targets, structural stops, cooldown rules, and Mermaid flowcharts.
+
 In addition to the 3:15–3:30 PM ET Debit Spread engine, this repository includes the **2-Layer JANUS-5 / UMB / Fixed-Range VWAP + 15:50 TPO Market Profile & 1m Delta Flow (CVD) Sniper Suite** and its complete `1999–2026` / `2020–2026` model datasets:
 
 ### Code & TradingView Pine (`janus5_umb_tpo_cvd/`)
